@@ -26,19 +26,22 @@ public OfferPageStepDefinition(TestContextSetup testContextSetup)
 }
 
 	@Then("user searched for {string} shortname in offers page")
-	public void user_searched_for_same_shortname_in_offers_page(String shortname) throws InterruptedException {
-		
+	public void user_searched_for_same_shortname_in_offers_page(String shortname) throws InterruptedException {		
+		switchToOffersPage();
+		testContextSetup.driver.findElement(By.xpath("//input[@type='search']")).clear();
+		Thread.sleep(3000);
+		testContextSetup.driver.findElement(By.xpath("//input[@type='search']")).sendKeys(shortname);
+		Thread.sleep(3000);
+		offerPageProductName = testContextSetup.driver.findElement(By.cssSelector("tr td:nth-child(1)")).getText();
+	}
+	
+	public void switchToOffersPage() {
 		testContextSetup.driver.findElement(By.linkText("Top Deals")).click();
 		Set<String> s1 = testContextSetup.driver.getWindowHandles();
 		Iterator<String> i1 = s1.iterator();
 		String parentWindow = i1.next();
 		String childWindow = i1.next();		
 		testContextSetup.driver.switchTo().window(childWindow);
-		testContextSetup.driver.findElement(By.xpath("//input[@type='search']")).clear();
-		Thread.sleep(3000);
-		testContextSetup.driver.findElement(By.xpath("//input[@type='search']")).sendKeys(shortname);
-		Thread.sleep(3000);
-		offerPageProductName = testContextSetup.driver.findElement(By.cssSelector("tr td:nth-child(1)")).getText();
 	}
 	
     @And("^validate productname in offers page matches with landing page$")
