@@ -12,6 +12,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pageObjects.LandingPage;
+import pageObjects.OffersPage;
 import utils.TestContextSetup;
 
 public class OfferPageStepDefinition {
@@ -28,15 +30,15 @@ public OfferPageStepDefinition(TestContextSetup testContextSetup)
 	@Then("user searched for {string} shortname in offers page")
 	public void user_searched_for_same_shortname_in_offers_page(String shortname) throws InterruptedException {		
 		switchToOffersPage();
-		testContextSetup.driver.findElement(By.xpath("//input[@type='search']")).clear();
+		OffersPage offersPage = new OffersPage(testContextSetup.driver);
+		offersPage.searchItem(shortname);
 		Thread.sleep(3000);
-		testContextSetup.driver.findElement(By.xpath("//input[@type='search']")).sendKeys(shortname);
-		Thread.sleep(3000);
-		offerPageProductName = testContextSetup.driver.findElement(By.cssSelector("tr td:nth-child(1)")).getText();
+		offerPageProductName = offersPage.getproductName();
 	}
 	
 	public void switchToOffersPage() {
-		testContextSetup.driver.findElement(By.linkText("Top Deals")).click();
+		LandingPage landingPage = new LandingPage(testContextSetup.driver);
+		landingPage.selectTopDealsPage();
 		Set<String> s1 = testContextSetup.driver.getWindowHandles();
 		Iterator<String> i1 = s1.iterator();
 		String parentWindow = i1.next();
