@@ -32,7 +32,6 @@ public LandingPageStepDefinition(TestContextSetup testContextSetup)
 	}
 	@When("user searched with Shortname {string} and extracted actual name of product")
 	public void user_searched_with_shortname_and_extracted_actual_name_of_product(String shortname) throws InterruptedException {
-		//testContextSetup.driver.findElement(By.xpath("//input[@type='search']")).sendKeys(shortname);
 		LandingPage landingPage = new LandingPage(testContextSetup.driver);
 		landingPage.searchItem(shortname);
 		Thread.sleep(3000);
