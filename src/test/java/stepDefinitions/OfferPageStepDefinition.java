@@ -53,6 +53,5 @@ public OfferPageStepDefinition(TestContextSetup testContextSetup)
     @And("^validate productname in offers page matches with landing page$")
     public void validate_productname_in_offers_page_matches_with_landing_page() throws Throwable {
     	Assert.assertEquals(offerPageProductName, testContextSetup.landingPageproductName);
-		testContextSetup.genericUtils.CloseAllWindows();
     }
 }
