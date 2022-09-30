@@ -12,7 +12,7 @@ public class TestContextSetup {
 	public TestBase testBase;
 	public GenericUtils genericUtils;
 
-	public TestContextSetup() {
+	public TestContextSetup() throws Exception {
 		
 		testBase = new TestBase();
 		pageObjectManager = new PageObjectManager(testBase.WebDriverManager());
