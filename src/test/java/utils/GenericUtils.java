@@ -20,7 +20,4 @@ public class GenericUtils {
 		driver.switchTo().window(childWindow);
 	}
 	
-	public void CloseAllWindows() {	
-		driver.quit();
-	}
 }
