@@ -8,7 +8,9 @@ import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class TestBase {
 
@@ -29,8 +31,13 @@ public class TestBase {
 		if(driver == null)
 		{
 			if(browser.equalsIgnoreCase("chrome")) {
-				System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "//src//test//resources//Chromedriver.exe");
-				driver = new ChromeDriver();
+//				System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "//src//test//resources//Chromedriver.exe");
+//				driver = new ChromeDriver();
+		        WebDriverManager.chromedriver().setup();
+		        ChromeOptions opt = new ChromeOptions();
+		        opt.setHeadless(true);
+		        driver = new ChromeDriver(opt);
+
 			}
 			else if(browser.equalsIgnoreCase("edge")) {
 				System.setProperty("webdriver.edge.driver", System.getProperty("user.dir") + "//src//test//resources//msedgedriver.exe");
